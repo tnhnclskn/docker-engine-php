@@ -1,0 +1,27 @@
+{
+    "name": "tnhnclskn/docker-engine-php",
+    "description": "Docker Engine API with PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tunahan Caliskan",
+            "email": "mail@tunahancaliskan.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+        "jane-php/open-api-runtime": "^6.0",
+        "http-interop/http-factory-guzzle": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tnhnclskn\\Docker\\API\\": "generated/",
+            "Tnhnclskn\\Docker\\": "src/"
+        }
+    },
+    "require-dev": {
+        "jane-php/open-api-2": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    }
+}

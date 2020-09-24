@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'directory' => 'generated',
+    'namespace' => 'Tnhnclskn\\Docker\\API',
+    'openapi-file' => __DIR__ . '/docker-swagger.yaml',
+    'strict' => false,
+];
