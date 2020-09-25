@@ -11,7 +11,8 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^7.0",
-        "jane-php/open-api-runtime": "^6.0"
+        "jane-php/open-api-runtime": "^6.0",
+        "http-interop/http-factory-guzzle": "^1.0"
     },
     "autoload": {
         "psr-4": {
