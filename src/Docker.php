@@ -26,7 +26,6 @@ class Docker
             'curl' => [
                 CURLOPT_UNIX_SOCKET_PATH => $unixSocket
             ],
-            'debug' => true,
         ]);
         return $httpClient;
     }
