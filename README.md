@@ -1,7 +1,7 @@
 Docker Engine PHP
 ==========
 
-**Docker Engine PHP** (for lack of a better name) is a [Docker](http://docker.com/) client written in PHP.
+**Docker Engine PHP** is a [Docker](http://docker.com/) client written in PHP.
 This library aim to reach 100% API support of the Docker Engine.
 
 The test suite currently passes against Docker Remote API v1.40.
