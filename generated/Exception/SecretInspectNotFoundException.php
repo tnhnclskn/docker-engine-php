@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class SecretInspectNotFoundException extends \RuntimeException implements ClientException
+class SecretInspectNotFoundException extends NotFoundException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

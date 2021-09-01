@@ -84,19 +84,6 @@ class SystemInfo
     */
     protected $dockerRootDir;
     /**
-    * Status information about this node (standalone Swarm API).
-    
-    <p><br /></p>
-    
-    > **Note**: The information returned in this field is only propagated
-    > by the Swarm standalone API, and is empty (`null`) when using
-    > built-in swarm mode.
-    
-    *
-    * @var string[][]|null
-    */
-    protected $systemStatus;
-    /**
     * Available plugins per type.
     
     <p><br /></p>
@@ -122,10 +109,16 @@ class SystemInfo
      */
     protected $swapLimit;
     /**
-     * Indicates if the host has kernel memory limit support enabled.
-     *
-     * @var bool|null
-     */
+    * Indicates if the host has kernel memory limit support enabled.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @var bool|null
+    */
     protected $kernelMemory;
     /**
     * Indicates if CPU CFS(Completely Fair Scheduler) period is supported by
@@ -235,6 +228,12 @@ class SystemInfo
      */
     protected $cgroupDriver = 'cgroupfs';
     /**
+     * The version of the cgroup.
+     *
+     * @var string|null
+     */
+    protected $cgroupVersion = '1';
+    /**
      * Number of event listeners subscribed.
      *
      * @var int|null
@@ -259,6 +258,19 @@ class SystemInfo
     * @var string|null
     */
     protected $operatingSystem;
+    /**
+    * Version of the host's operating system
+    
+    <p><br /></p>
+    
+    > **Note**: The information returned in this field, including its
+    > very existence, and the formatting of values, should not be considered
+    > stable, and may change without notice.
+    
+    *
+    * @var string|null
+    */
+    protected $oSVersion;
     /**
     * Generic type of the operating system of the host, as returned by the
     Go runtime (`GOOS`).
@@ -384,7 +396,7 @@ class SystemInfo
     /**
     * Version string of the daemon.
     
-    > **Note**: the [standalone Swarm API](https://docs.docker.com/swarm/swarm-api/)
+    > **Note**: the [standalone Swarm API](/swarm/swarm-api/)
     > returns the Swarm version instead of the daemon  version, for example
     > `swarm/1.2.8`.
     
@@ -401,7 +413,7 @@ class SystemInfo
     
     <p><br /></p>
     
-    > **Note**: This field is only propagated when using standalone Swarm
+    > **Deprecated**: This field is only propagated when using standalone Swarm
     > mode, and overlay networking using an external k/v store. Overlay
     > networks with Swarm mode enabled use the built-in raft store, and
     > this field will be empty.
@@ -417,7 +429,7 @@ class SystemInfo
     
     <p><br /></p>
     
-    > **Note**: This field is only propagated when using standalone Swarm
+    > **Deprecated**: This field is only propagated when using standalone Swarm
     > mode, and overlay networking using an external k/v store. Overlay
     > networks with Swarm mode enabled use the built-in raft store, and
     > this field will be empty.
@@ -539,6 +551,17 @@ class SystemInfo
     * @var string|null
     */
     protected $productLicense;
+    /**
+    * List of custom default address pools for local networks, which can be
+    specified in the daemon.json file or dockerd option.
+    
+    Example: a Base "10.10.0.0/16" with Size 24 will define the set of 256
+    10.10.[0-255].0/24 address pools.
+    
+    *
+    * @var SystemInfoDefaultAddressPoolsItem[]|null
+    */
+    protected $defaultAddressPools;
     /**
     * List of warnings / informational messages about missing features, or
     issues related to the daemon configuration.
@@ -789,41 +812,6 @@ class SystemInfo
         return $this;
     }
     /**
-    * Status information about this node (standalone Swarm API).
-    
-    <p><br /></p>
-    
-    > **Note**: The information returned in this field is only propagated
-    > by the Swarm standalone API, and is empty (`null`) when using
-    > built-in swarm mode.
-    
-    *
-    * @return string[][]|null
-    */
-    public function getSystemStatus() : ?array
-    {
-        return $this->systemStatus;
-    }
-    /**
-    * Status information about this node (standalone Swarm API).
-    
-    <p><br /></p>
-    
-    > **Note**: The information returned in this field is only propagated
-    > by the Swarm standalone API, and is empty (`null`) when using
-    > built-in swarm mode.
-    
-    *
-    * @param string[][]|null $systemStatus
-    *
-    * @return self
-    */
-    public function setSystemStatus(?array $systemStatus) : self
-    {
-        $this->systemStatus = $systemStatus;
-        return $this;
-    }
-    /**
     * Available plugins per type.
     
     <p><br /></p>
@@ -901,21 +889,33 @@ class SystemInfo
         return $this;
     }
     /**
-     * Indicates if the host has kernel memory limit support enabled.
-     *
-     * @return bool|null
-     */
+    * Indicates if the host has kernel memory limit support enabled.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @return bool|null
+    */
     public function getKernelMemory() : ?bool
     {
         return $this->kernelMemory;
     }
     /**
-     * Indicates if the host has kernel memory limit support enabled.
-     *
-     * @param bool|null $kernelMemory
-     *
-     * @return self
-     */
+    * Indicates if the host has kernel memory limit support enabled.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @param bool|null $kernelMemory
+    *
+    * @return self
+    */
     public function setKernelMemory(?bool $kernelMemory) : self
     {
         $this->kernelMemory = $kernelMemory;
@@ -1271,6 +1271,27 @@ class SystemInfo
         return $this;
     }
     /**
+     * The version of the cgroup.
+     *
+     * @return string|null
+     */
+    public function getCgroupVersion() : ?string
+    {
+        return $this->cgroupVersion;
+    }
+    /**
+     * The version of the cgroup.
+     *
+     * @param string|null $cgroupVersion
+     *
+     * @return self
+     */
+    public function setCgroupVersion(?string $cgroupVersion) : self
+    {
+        $this->cgroupVersion = $cgroupVersion;
+        return $this;
+    }
+    /**
      * Number of event listeners subscribed.
      *
      * @return int|null
@@ -1345,6 +1366,41 @@ class SystemInfo
     public function setOperatingSystem(?string $operatingSystem) : self
     {
         $this->operatingSystem = $operatingSystem;
+        return $this;
+    }
+    /**
+    * Version of the host's operating system
+    
+    <p><br /></p>
+    
+    > **Note**: The information returned in this field, including its
+    > very existence, and the formatting of values, should not be considered
+    > stable, and may change without notice.
+    
+    *
+    * @return string|null
+    */
+    public function getOSVersion() : ?string
+    {
+        return $this->oSVersion;
+    }
+    /**
+    * Version of the host's operating system
+    
+    <p><br /></p>
+    
+    > **Note**: The information returned in this field, including its
+    > very existence, and the formatting of values, should not be considered
+    > stable, and may change without notice.
+    
+    *
+    * @param string|null $oSVersion
+    *
+    * @return self
+    */
+    public function setOSVersion(?string $oSVersion) : self
+    {
+        $this->oSVersion = $oSVersion;
         return $this;
     }
     /**
@@ -1711,7 +1767,7 @@ class SystemInfo
     /**
     * Version string of the daemon.
     
-    > **Note**: the [standalone Swarm API](https://docs.docker.com/swarm/swarm-api/)
+    > **Note**: the [standalone Swarm API](/swarm/swarm-api/)
     > returns the Swarm version instead of the daemon  version, for example
     > `swarm/1.2.8`.
     
@@ -1725,7 +1781,7 @@ class SystemInfo
     /**
     * Version string of the daemon.
     
-    > **Note**: the [standalone Swarm API](https://docs.docker.com/swarm/swarm-api/)
+    > **Note**: the [standalone Swarm API](/swarm/swarm-api/)
     > returns the Swarm version instead of the daemon  version, for example
     > `swarm/1.2.8`.
     
@@ -1748,7 +1804,7 @@ class SystemInfo
     
     <p><br /></p>
     
-    > **Note**: This field is only propagated when using standalone Swarm
+    > **Deprecated**: This field is only propagated when using standalone Swarm
     > mode, and overlay networking using an external k/v store. Overlay
     > networks with Swarm mode enabled use the built-in raft store, and
     > this field will be empty.
@@ -1769,7 +1825,7 @@ class SystemInfo
     
     <p><br /></p>
     
-    > **Note**: This field is only propagated when using standalone Swarm
+    > **Deprecated**: This field is only propagated when using standalone Swarm
     > mode, and overlay networking using an external k/v store. Overlay
     > networks with Swarm mode enabled use the built-in raft store, and
     > this field will be empty.
@@ -1791,7 +1847,7 @@ class SystemInfo
     
     <p><br /></p>
     
-    > **Note**: This field is only propagated when using standalone Swarm
+    > **Deprecated**: This field is only propagated when using standalone Swarm
     > mode, and overlay networking using an external k/v store. Overlay
     > networks with Swarm mode enabled use the built-in raft store, and
     > this field will be empty.
@@ -1810,7 +1866,7 @@ class SystemInfo
     
     <p><br /></p>
     
-    > **Note**: This field is only propagated when using standalone Swarm
+    > **Deprecated**: This field is only propagated when using standalone Swarm
     > mode, and overlay networking using an external k/v store. Overlay
     > networks with Swarm mode enabled use the built-in raft store, and
     > this field will be empty.
@@ -2148,6 +2204,37 @@ class SystemInfo
     public function setProductLicense(?string $productLicense) : self
     {
         $this->productLicense = $productLicense;
+        return $this;
+    }
+    /**
+    * List of custom default address pools for local networks, which can be
+    specified in the daemon.json file or dockerd option.
+    
+    Example: a Base "10.10.0.0/16" with Size 24 will define the set of 256
+    10.10.[0-255].0/24 address pools.
+    
+    *
+    * @return SystemInfoDefaultAddressPoolsItem[]|null
+    */
+    public function getDefaultAddressPools() : ?array
+    {
+        return $this->defaultAddressPools;
+    }
+    /**
+    * List of custom default address pools for local networks, which can be
+    specified in the daemon.json file or dockerd option.
+    
+    Example: a Base "10.10.0.0/16" with Size 24 will define the set of 256
+    10.10.[0-255].0/24 address pools.
+    
+    *
+    * @param SystemInfoDefaultAddressPoolsItem[]|null $defaultAddressPools
+    *
+    * @return self
+    */
+    public function setDefaultAddressPools(?array $defaultAddressPools) : self
+    {
+        $this->defaultAddressPools = $defaultAddressPools;
         return $this;
     }
     /**

@@ -33,7 +33,7 @@ class ContainersIdUpdatePostBodyNormalizer implements DenormalizerInterface, Nor
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersIdUpdatePostBody();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('CpuShares', $data) && $data['CpuShares'] !== null) {
@@ -206,11 +206,11 @@ class ContainersIdUpdatePostBodyNormalizer implements DenormalizerInterface, Nor
         elseif (\array_key_exists('MemorySwappiness', $data) && $data['MemorySwappiness'] === null) {
             $object->setMemorySwappiness(null);
         }
-        if (\array_key_exists('NanoCPUs', $data) && $data['NanoCPUs'] !== null) {
-            $object->setNanoCPUs($data['NanoCPUs']);
+        if (\array_key_exists('NanoCpus', $data) && $data['NanoCpus'] !== null) {
+            $object->setNanoCpus($data['NanoCpus']);
         }
-        elseif (\array_key_exists('NanoCPUs', $data) && $data['NanoCPUs'] === null) {
-            $object->setNanoCPUs(null);
+        elseif (\array_key_exists('NanoCpus', $data) && $data['NanoCpus'] === null) {
+            $object->setNanoCpus(null);
         }
         if (\array_key_exists('OomKillDisable', $data) && $data['OomKillDisable'] !== null) {
             $object->setOomKillDisable($data['OomKillDisable']);
@@ -376,8 +376,8 @@ class ContainersIdUpdatePostBodyNormalizer implements DenormalizerInterface, Nor
         if (null !== $object->getMemorySwappiness()) {
             $data['MemorySwappiness'] = $object->getMemorySwappiness();
         }
-        if (null !== $object->getNanoCPUs()) {
-            $data['NanoCPUs'] = $object->getNanoCPUs();
+        if (null !== $object->getNanoCpus()) {
+            $data['NanoCpus'] = $object->getNanoCpus();
         }
         if (null !== $object->getOomKillDisable()) {
             $data['OomKillDisable'] = $object->getOomKillDisable();

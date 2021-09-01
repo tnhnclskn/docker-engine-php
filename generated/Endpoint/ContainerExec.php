@@ -42,7 +42,7 @@ class ContainerExec extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint im
      *
      * @return null|\Tnhnclskn\Docker\API\Model\IdResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (201 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\IdResponse', 'json');

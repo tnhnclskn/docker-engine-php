@@ -13,7 +13,7 @@ class ContainerAttach extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint 
     Either the `stream` or `logs` parameter must be `true` for this endpoint
     to do anything.
     
-    See the [documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/)
+    See the [documentation for the `docker attach` command](/engine/reference/commandline/attach/)
     for more details.
     
     ### Hijacking
@@ -168,7 +168,7 @@ class ContainerAttach extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint 
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (101 === $status) {
             return null;

@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class SwarmInitInternalServerErrorException extends \RuntimeException implements ServerException
+class SwarmInitInternalServerErrorException extends InternalServerErrorException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

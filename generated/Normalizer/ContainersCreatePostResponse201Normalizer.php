@@ -33,7 +33,7 @@ class ContainersCreatePostResponse201Normalizer implements DenormalizerInterface
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersCreatePostResponse201();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Id', $data) && $data['Id'] !== null) {

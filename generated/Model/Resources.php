@@ -150,10 +150,16 @@ class Resources
      */
     protected $deviceRequests;
     /**
-     * Kernel memory limit in bytes.
-     *
-     * @var int|null
-     */
+    * Kernel memory limit in bytes.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @var int|null
+    */
     protected $kernelMemory;
     /**
      * Hard limit for kernel TCP buffer memory (in bytes).
@@ -188,7 +194,7 @@ class Resources
      *
      * @var int|null
      */
-    protected $nanoCPUs;
+    protected $nanoCpus;
     /**
      * Disable OOM Killer for the container.
      *
@@ -712,21 +718,33 @@ class Resources
         return $this;
     }
     /**
-     * Kernel memory limit in bytes.
-     *
-     * @return int|null
-     */
+    * Kernel memory limit in bytes.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @return int|null
+    */
     public function getKernelMemory() : ?int
     {
         return $this->kernelMemory;
     }
     /**
-     * Kernel memory limit in bytes.
-     *
-     * @param int|null $kernelMemory
-     *
-     * @return self
-     */
+    * Kernel memory limit in bytes.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @param int|null $kernelMemory
+    *
+    * @return self
+    */
     public function setKernelMemory(?int $kernelMemory) : self
     {
         $this->kernelMemory = $kernelMemory;
@@ -829,20 +847,20 @@ class Resources
      *
      * @return int|null
      */
-    public function getNanoCPUs() : ?int
+    public function getNanoCpus() : ?int
     {
-        return $this->nanoCPUs;
+        return $this->nanoCpus;
     }
     /**
      * CPU quota in units of 10<sup>-9</sup> CPUs.
      *
-     * @param int|null $nanoCPUs
+     * @param int|null $nanoCpus
      *
      * @return self
      */
-    public function setNanoCPUs(?int $nanoCPUs) : self
+    public function setNanoCpus(?int $nanoCpus) : self
     {
-        $this->nanoCPUs = $nanoCPUs;
+        $this->nanoCpus = $nanoCpus;
         return $this;
     }
     /**

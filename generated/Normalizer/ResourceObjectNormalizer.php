@@ -33,7 +33,7 @@ class ResourceObjectNormalizer implements DenormalizerInterface, NormalizerInter
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ResourceObject();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('NanoCPUs', $data) && $data['NanoCPUs'] !== null) {

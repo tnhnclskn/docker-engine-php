@@ -33,7 +33,7 @@ class VolumesGetResponse200Normalizer implements DenormalizerInterface, Normaliz
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\VolumesGetResponse200();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Volumes', $data) && $data['Volumes'] !== null) {

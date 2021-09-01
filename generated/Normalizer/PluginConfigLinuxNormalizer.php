@@ -33,7 +33,7 @@ class PluginConfigLinuxNormalizer implements DenormalizerInterface, NormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\PluginConfigLinux();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Capabilities', $data) && $data['Capabilities'] !== null) {

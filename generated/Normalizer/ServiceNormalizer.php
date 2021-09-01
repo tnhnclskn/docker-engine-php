@@ -33,7 +33,7 @@ class ServiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\Service();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('ID', $data) && $data['ID'] !== null) {
@@ -78,6 +78,18 @@ class ServiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
         elseif (\array_key_exists('UpdateStatus', $data) && $data['UpdateStatus'] === null) {
             $object->setUpdateStatus(null);
         }
+        if (\array_key_exists('ServiceStatus', $data) && $data['ServiceStatus'] !== null) {
+            $object->setServiceStatus($this->denormalizer->denormalize($data['ServiceStatus'], 'Tnhnclskn\\Docker\\API\\Model\\ServiceServiceStatus', 'json', $context));
+        }
+        elseif (\array_key_exists('ServiceStatus', $data) && $data['ServiceStatus'] === null) {
+            $object->setServiceStatus(null);
+        }
+        if (\array_key_exists('JobStatus', $data) && $data['JobStatus'] !== null) {
+            $object->setJobStatus($this->denormalizer->denormalize($data['JobStatus'], 'Tnhnclskn\\Docker\\API\\Model\\ServiceJobStatus', 'json', $context));
+        }
+        elseif (\array_key_exists('JobStatus', $data) && $data['JobStatus'] === null) {
+            $object->setJobStatus(null);
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -103,6 +115,12 @@ class ServiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
         }
         if (null !== $object->getUpdateStatus()) {
             $data['UpdateStatus'] = $this->normalizer->normalize($object->getUpdateStatus(), 'json', $context);
+        }
+        if (null !== $object->getServiceStatus()) {
+            $data['ServiceStatus'] = $this->normalizer->normalize($object->getServiceStatus(), 'json', $context);
+        }
+        if (null !== $object->getJobStatus()) {
+            $data['JobStatus'] = $this->normalizer->normalize($object->getJobStatus(), 'json', $context);
         }
         return $data;
     }

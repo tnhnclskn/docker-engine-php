@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class NetworkListInternalServerErrorException extends \RuntimeException implements ServerException
+class NetworkListInternalServerErrorException extends InternalServerErrorException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

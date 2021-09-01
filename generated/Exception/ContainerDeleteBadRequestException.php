@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ContainerDeleteBadRequestException extends \RuntimeException implements ClientException
+class ContainerDeleteBadRequestException extends BadRequestException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

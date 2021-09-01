@@ -33,7 +33,7 @@ class SwarmInitPostBodyNormalizer implements DenormalizerInterface, NormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\SwarmInitPostBody();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('ListenAddr', $data) && $data['ListenAddr'] !== null) {

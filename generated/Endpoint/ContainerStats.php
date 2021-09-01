@@ -17,6 +17,12 @@ class ContainerStats extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint i
     nil then for compatibility with older daemons the length of the
     corresponding `cpu_usage.percpu_usage` array should be used.
     
+    On a cgroup v2 host, the following fields are not set
+    * `blkio_stats`: all fields other than `io_service_bytes_recursive`
+    * `cpu_stats`: `cpu_usage.percpu_usage`
+    * `memory_stats`: `max_usage` and `failcnt`
+    Also, `memory_stats.stats` fields are incompatible with cgroup v1.
+    
     To calculate the values shown by the `stats` command of the docker cli tool
     the following formulas can be used:
     * used_memory = `memory_stats.usage - memory_stats.stats.cache`
@@ -32,6 +38,9 @@ class ContainerStats extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint i
     * @param array $queryParameters {
     *     @var bool $stream Stream the output. If false, the stats will be output once and then
     it will disconnect.
+    
+    *     @var bool $one-shot Only get a single stat instead of waiting for 2 cycles. Must be used
+    with `stream=false`.
     
     * }
     */
@@ -60,10 +69,11 @@ class ContainerStats extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint i
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('stream'));
+        $optionsResolver->setDefined(array('stream', 'one-shot'));
         $optionsResolver->setRequired(array());
-        $optionsResolver->setDefaults(array('stream' => true));
+        $optionsResolver->setDefaults(array('stream' => true, 'one-shot' => false));
         $optionsResolver->setAllowedTypes('stream', array('bool'));
+        $optionsResolver->setAllowedTypes('one-shot', array('bool'));
         return $optionsResolver;
     }
     /**
@@ -74,7 +84,7 @@ class ContainerStats extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint i
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return json_decode($body);

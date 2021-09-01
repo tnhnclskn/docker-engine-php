@@ -33,7 +33,7 @@ class ContainerConfigNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainerConfig();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Hostname', $data) && $data['Hostname'] !== null) {

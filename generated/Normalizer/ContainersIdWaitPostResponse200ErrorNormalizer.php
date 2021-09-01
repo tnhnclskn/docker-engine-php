@@ -33,7 +33,7 @@ class ContainersIdWaitPostResponse200ErrorNormalizer implements DenormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersIdWaitPostResponse200Error();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Message', $data) && $data['Message'] !== null) {

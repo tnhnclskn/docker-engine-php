@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ContainerWaitNotFoundException extends \RuntimeException implements ClientException
+class ContainerWaitNotFoundException extends NotFoundException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

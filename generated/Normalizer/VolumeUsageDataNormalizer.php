@@ -33,7 +33,7 @@ class VolumeUsageDataNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\VolumeUsageData();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Size', $data) && $data['Size'] !== null) {

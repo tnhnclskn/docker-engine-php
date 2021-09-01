@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class PluginPushInternalServerErrorException extends \RuntimeException implements ServerException
+class PluginPushInternalServerErrorException extends InternalServerErrorException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ConfigDeleteServiceUnavailableException extends \RuntimeException implements ServerException
+class ConfigDeleteServiceUnavailableException extends ServiceUnavailableException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

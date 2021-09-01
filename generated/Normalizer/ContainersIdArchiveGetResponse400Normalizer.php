@@ -33,7 +33,7 @@ class ContainersIdArchiveGetResponse400Normalizer implements DenormalizerInterfa
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersIdArchiveGetResponse400();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('message', $data) && $data['message'] !== null) {

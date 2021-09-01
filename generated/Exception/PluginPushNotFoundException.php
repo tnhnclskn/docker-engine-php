@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class PluginPushNotFoundException extends \RuntimeException implements ClientException
+class PluginPushNotFoundException extends NotFoundException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

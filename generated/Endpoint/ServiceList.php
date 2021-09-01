@@ -18,6 +18,8 @@ class ServiceList extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint impl
     - `mode=["replicated"|"global"]`
     - `name=<service name>`
     
+    *     @var bool $status Include service status, with count of running and desired tasks.
+    
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -44,10 +46,11 @@ class ServiceList extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint impl
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filters'));
+        $optionsResolver->setDefined(array('filters', 'status'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
         $optionsResolver->setAllowedTypes('filters', array('string'));
+        $optionsResolver->setAllowedTypes('status', array('bool'));
         return $optionsResolver;
     }
     /**
@@ -58,7 +61,7 @@ class ServiceList extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint impl
      *
      * @return null|\Tnhnclskn\Docker\API\Model\Service[]
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\Service[]', 'json');

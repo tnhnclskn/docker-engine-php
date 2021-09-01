@@ -33,7 +33,7 @@ class EngineDescriptionPluginsItemNormalizer implements DenormalizerInterface, N
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\EngineDescriptionPluginsItem();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Type', $data) && $data['Type'] !== null) {

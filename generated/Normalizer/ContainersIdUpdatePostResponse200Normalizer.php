@@ -33,7 +33,7 @@ class ContainersIdUpdatePostResponse200Normalizer implements DenormalizerInterfa
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersIdUpdatePostResponse200();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Warnings', $data) && $data['Warnings'] !== null) {

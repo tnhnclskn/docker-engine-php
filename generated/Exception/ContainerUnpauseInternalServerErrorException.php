@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ContainerUnpauseInternalServerErrorException extends \RuntimeException implements ServerException
+class ContainerUnpauseInternalServerErrorException extends InternalServerErrorException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

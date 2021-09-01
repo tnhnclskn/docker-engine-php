@@ -33,7 +33,7 @@ class MountBindOptionsNormalizer implements DenormalizerInterface, NormalizerInt
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\MountBindOptions();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Propagation', $data) && $data['Propagation'] !== null) {

@@ -33,7 +33,7 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\Task();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('ID', $data) && $data['ID'] !== null) {
@@ -122,6 +122,12 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         elseif (\array_key_exists('DesiredState', $data) && $data['DesiredState'] === null) {
             $object->setDesiredState(null);
         }
+        if (\array_key_exists('JobIteration', $data) && $data['JobIteration'] !== null) {
+            $object->setJobIteration($this->denormalizer->denormalize($data['JobIteration'], 'Tnhnclskn\\Docker\\API\\Model\\ObjectVersion', 'json', $context));
+        }
+        elseif (\array_key_exists('JobIteration', $data) && $data['JobIteration'] === null) {
+            $object->setJobIteration(null);
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -173,6 +179,9 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         }
         if (null !== $object->getDesiredState()) {
             $data['DesiredState'] = $object->getDesiredState();
+        }
+        if (null !== $object->getJobIteration()) {
+            $data['JobIteration'] = $this->normalizer->normalize($object->getJobIteration(), 'json', $context);
         }
         return $data;
     }

@@ -55,7 +55,7 @@ class ContainerCreate extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint 
      *
      * @return null|\Tnhnclskn\Docker\API\Model\ContainersCreatePostResponse201
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (201 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\ContainersCreatePostResponse201', 'json');

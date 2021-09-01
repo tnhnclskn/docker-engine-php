@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ServiceCreateConflictException extends \RuntimeException implements ClientException
+class ServiceCreateConflictException extends ConflictException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

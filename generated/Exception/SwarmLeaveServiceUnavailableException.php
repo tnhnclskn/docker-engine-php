@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class SwarmLeaveServiceUnavailableException extends \RuntimeException implements ServerException
+class SwarmLeaveServiceUnavailableException extends ServiceUnavailableException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

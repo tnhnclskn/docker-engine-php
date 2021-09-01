@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class SwarmInitBadRequestException extends \RuntimeException implements ClientException
+class SwarmInitBadRequestException extends BadRequestException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

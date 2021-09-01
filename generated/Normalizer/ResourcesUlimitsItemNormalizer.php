@@ -33,7 +33,7 @@ class ResourcesUlimitsItemNormalizer implements DenormalizerInterface, Normalize
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ResourcesUlimitsItem();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Name', $data) && $data['Name'] !== null) {

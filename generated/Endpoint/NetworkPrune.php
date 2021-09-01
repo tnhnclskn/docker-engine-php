@@ -53,7 +53,7 @@ class NetworkPrune extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint imp
      *
      * @return null|\Tnhnclskn\Docker\API\Model\NetworksPrunePostResponse200
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\NetworksPrunePostResponse200', 'json');

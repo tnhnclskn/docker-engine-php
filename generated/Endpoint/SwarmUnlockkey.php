@@ -29,7 +29,7 @@ class SwarmUnlockkey extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint i
      *
      * @return null|\Tnhnclskn\Docker\API\Model\SwarmUnlockkeyGetResponse200
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\SwarmUnlockkeyGetResponse200', 'json');

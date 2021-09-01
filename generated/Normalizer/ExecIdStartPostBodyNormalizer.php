@@ -33,7 +33,7 @@ class ExecIdStartPostBodyNormalizer implements DenormalizerInterface, Normalizer
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ExecIdStartPostBody();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Detach', $data) && $data['Detach'] !== null) {

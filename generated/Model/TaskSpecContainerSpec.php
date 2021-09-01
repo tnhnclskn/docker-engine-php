@@ -179,6 +179,28 @@ class TaskSpecContainerSpec
     */
     protected $sysctls;
     /**
+    * A list of kernel capabilities to add to the default set
+    for the container.
+    
+    *
+    * @var string[]|null
+    */
+    protected $capabilityAdd;
+    /**
+    * A list of kernel capabilities to drop from the default set
+    for the container.
+    
+    *
+    * @var string[]|null
+    */
+    protected $capabilityDrop;
+    /**
+     * A list of resource limits to set in the container. For example: `{"Name": "nofile", "Soft": 1024, "Hard": 2048}`"
+     *
+     * @var TaskSpecContainerSpecUlimitsItem[]|null
+     */
+    protected $ulimits;
+    /**
      * The image name to use for the container
      *
      * @return string|null
@@ -740,6 +762,77 @@ class TaskSpecContainerSpec
     public function setSysctls(?iterable $sysctls) : self
     {
         $this->sysctls = $sysctls;
+        return $this;
+    }
+    /**
+    * A list of kernel capabilities to add to the default set
+    for the container.
+    
+    *
+    * @return string[]|null
+    */
+    public function getCapabilityAdd() : ?array
+    {
+        return $this->capabilityAdd;
+    }
+    /**
+    * A list of kernel capabilities to add to the default set
+    for the container.
+    
+    *
+    * @param string[]|null $capabilityAdd
+    *
+    * @return self
+    */
+    public function setCapabilityAdd(?array $capabilityAdd) : self
+    {
+        $this->capabilityAdd = $capabilityAdd;
+        return $this;
+    }
+    /**
+    * A list of kernel capabilities to drop from the default set
+    for the container.
+    
+    *
+    * @return string[]|null
+    */
+    public function getCapabilityDrop() : ?array
+    {
+        return $this->capabilityDrop;
+    }
+    /**
+    * A list of kernel capabilities to drop from the default set
+    for the container.
+    
+    *
+    * @param string[]|null $capabilityDrop
+    *
+    * @return self
+    */
+    public function setCapabilityDrop(?array $capabilityDrop) : self
+    {
+        $this->capabilityDrop = $capabilityDrop;
+        return $this;
+    }
+    /**
+     * A list of resource limits to set in the container. For example: `{"Name": "nofile", "Soft": 1024, "Hard": 2048}`"
+     *
+     * @return TaskSpecContainerSpecUlimitsItem[]|null
+     */
+    public function getUlimits() : ?array
+    {
+        return $this->ulimits;
+    }
+    /**
+     * A list of resource limits to set in the container. For example: `{"Name": "nofile", "Soft": 1024, "Hard": 2048}`"
+     *
+     * @param TaskSpecContainerSpecUlimitsItem[]|null $ulimits
+     *
+     * @return self
+     */
+    public function setUlimits(?array $ulimits) : self
+    {
+        $this->ulimits = $ulimits;
         return $this;
     }
 }

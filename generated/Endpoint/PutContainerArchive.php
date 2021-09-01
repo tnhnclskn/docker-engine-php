@@ -68,7 +68,7 @@ class PutContainerArchive extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpo
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return null;

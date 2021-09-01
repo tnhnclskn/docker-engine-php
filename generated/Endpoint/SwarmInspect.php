@@ -30,7 +30,7 @@ class SwarmInspect extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint imp
      *
      * @return null|\Tnhnclskn\Docker\API\Model\Swarm
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\Swarm', 'json');

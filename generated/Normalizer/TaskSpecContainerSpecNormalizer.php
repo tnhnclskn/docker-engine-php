@@ -33,7 +33,7 @@ class TaskSpecContainerSpecNormalizer implements DenormalizerInterface, Normaliz
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\TaskSpecContainerSpec();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Image', $data) && $data['Image'] !== null) {
@@ -220,6 +220,36 @@ class TaskSpecContainerSpecNormalizer implements DenormalizerInterface, Normaliz
         elseif (\array_key_exists('Sysctls', $data) && $data['Sysctls'] === null) {
             $object->setSysctls(null);
         }
+        if (\array_key_exists('CapabilityAdd', $data) && $data['CapabilityAdd'] !== null) {
+            $values_10 = array();
+            foreach ($data['CapabilityAdd'] as $value_10) {
+                $values_10[] = $value_10;
+            }
+            $object->setCapabilityAdd($values_10);
+        }
+        elseif (\array_key_exists('CapabilityAdd', $data) && $data['CapabilityAdd'] === null) {
+            $object->setCapabilityAdd(null);
+        }
+        if (\array_key_exists('CapabilityDrop', $data) && $data['CapabilityDrop'] !== null) {
+            $values_11 = array();
+            foreach ($data['CapabilityDrop'] as $value_11) {
+                $values_11[] = $value_11;
+            }
+            $object->setCapabilityDrop($values_11);
+        }
+        elseif (\array_key_exists('CapabilityDrop', $data) && $data['CapabilityDrop'] === null) {
+            $object->setCapabilityDrop(null);
+        }
+        if (\array_key_exists('Ulimits', $data) && $data['Ulimits'] !== null) {
+            $values_12 = array();
+            foreach ($data['Ulimits'] as $value_12) {
+                $values_12[] = $this->denormalizer->denormalize($value_12, 'Tnhnclskn\\Docker\\API\\Model\\TaskSpecContainerSpecUlimitsItem', 'json', $context);
+            }
+            $object->setUlimits($values_12);
+        }
+        elseif (\array_key_exists('Ulimits', $data) && $data['Ulimits'] === null) {
+            $object->setUlimits(null);
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -336,6 +366,27 @@ class TaskSpecContainerSpecNormalizer implements DenormalizerInterface, Normaliz
                 $values_9[$key_1] = $value_9;
             }
             $data['Sysctls'] = $values_9;
+        }
+        if (null !== $object->getCapabilityAdd()) {
+            $values_10 = array();
+            foreach ($object->getCapabilityAdd() as $value_10) {
+                $values_10[] = $value_10;
+            }
+            $data['CapabilityAdd'] = $values_10;
+        }
+        if (null !== $object->getCapabilityDrop()) {
+            $values_11 = array();
+            foreach ($object->getCapabilityDrop() as $value_11) {
+                $values_11[] = $value_11;
+            }
+            $data['CapabilityDrop'] = $values_11;
+        }
+        if (null !== $object->getUlimits()) {
+            $values_12 = array();
+            foreach ($object->getUlimits() as $value_12) {
+                $values_12[] = $this->normalizer->normalize($value_12, 'json', $context);
+            }
+            $data['Ulimits'] = $values_12;
         }
         return $data;
     }

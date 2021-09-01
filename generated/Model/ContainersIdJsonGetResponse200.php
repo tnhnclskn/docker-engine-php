@@ -67,12 +67,6 @@ class ContainersIdJsonGetResponse200
      */
     protected $logPath;
     /**
-     * TODO
-     *
-     * @var mixed|null
-     */
-    protected $node;
-    /**
      * 
      *
      * @var string|null
@@ -376,27 +370,6 @@ class ContainersIdJsonGetResponse200
     public function setLogPath(?string $logPath) : self
     {
         $this->logPath = $logPath;
-        return $this;
-    }
-    /**
-     * TODO
-     *
-     * @return mixed
-     */
-    public function getNode()
-    {
-        return $this->node;
-    }
-    /**
-     * TODO
-     *
-     * @param mixed $node
-     *
-     * @return self
-     */
-    public function setNode($node) : self
-    {
-        $this->node = $node;
         return $this;
     }
     /**

@@ -53,7 +53,7 @@ class ServiceInspect extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint i
      *
      * @return null|\Tnhnclskn\Docker\API\Model\Service
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\Service', 'json');

@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class NodeListServiceUnavailableException extends \RuntimeException implements ServerException
+class NodeListServiceUnavailableException extends ServiceUnavailableException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

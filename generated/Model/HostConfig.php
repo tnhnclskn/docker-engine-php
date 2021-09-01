@@ -150,10 +150,16 @@ class HostConfig
      */
     protected $deviceRequests;
     /**
-     * Kernel memory limit in bytes.
-     *
-     * @var int|null
-     */
+    * Kernel memory limit in bytes.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @var int|null
+    */
     protected $kernelMemory;
     /**
      * Hard limit for kernel TCP buffer memory (in bytes).
@@ -188,7 +194,7 @@ class HostConfig
      *
      * @var int|null
      */
-    protected $nanoCPUs;
+    protected $nanoCpus;
     /**
      * Disable OOM Killer for the container.
      *
@@ -377,16 +383,6 @@ class HostConfig
      */
     protected $mounts;
     /**
-    * A list of kernel capabilities to be available for container (this
-    overrides the default set).
-    
-    Conflicts with options 'CapAdd' and 'CapDrop'"
-    
-    *
-    * @var string[]|null
-    */
-    protected $capabilities;
-    /**
     * A list of kernel capabilities to add to the container. Conflicts
     with option 'Capabilities'.
     
@@ -402,6 +398,19 @@ class HostConfig
     * @var string[]|null
     */
     protected $capDrop;
+    /**
+    * cgroup namespace mode for the container. Possible values are:
+    
+    - `"private"`: the container runs in its own private cgroup namespace
+    - `"host"`: use the host system's cgroup namespace
+    
+    If not specified, the daemon default is used, which can either be `"private"`
+    or `"host"`, depending on daemon version, kernel support and configuration.
+    
+    *
+    * @var string|null
+    */
+    protected $cgroupnsMode;
     /**
      * A list of DNS servers for the container to use.
      *
@@ -1052,21 +1061,33 @@ class HostConfig
         return $this;
     }
     /**
-     * Kernel memory limit in bytes.
-     *
-     * @return int|null
-     */
+    * Kernel memory limit in bytes.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @return int|null
+    */
     public function getKernelMemory() : ?int
     {
         return $this->kernelMemory;
     }
     /**
-     * Kernel memory limit in bytes.
-     *
-     * @param int|null $kernelMemory
-     *
-     * @return self
-     */
+    * Kernel memory limit in bytes.
+    
+    <p><br /></p>
+    
+    > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated
+    > `kmem.limit_in_bytes`.
+    
+    *
+    * @param int|null $kernelMemory
+    *
+    * @return self
+    */
     public function setKernelMemory(?int $kernelMemory) : self
     {
         $this->kernelMemory = $kernelMemory;
@@ -1169,20 +1190,20 @@ class HostConfig
      *
      * @return int|null
      */
-    public function getNanoCPUs() : ?int
+    public function getNanoCpus() : ?int
     {
-        return $this->nanoCPUs;
+        return $this->nanoCpus;
     }
     /**
      * CPU quota in units of 10<sup>-9</sup> CPUs.
      *
-     * @param int|null $nanoCPUs
+     * @param int|null $nanoCpus
      *
      * @return self
      */
-    public function setNanoCPUs(?int $nanoCPUs) : self
+    public function setNanoCpus(?int $nanoCpus) : self
     {
-        $this->nanoCPUs = $nanoCPUs;
+        $this->nanoCpus = $nanoCpus;
         return $this;
     }
     /**
@@ -1722,35 +1743,6 @@ class HostConfig
         return $this;
     }
     /**
-    * A list of kernel capabilities to be available for container (this
-    overrides the default set).
-    
-    Conflicts with options 'CapAdd' and 'CapDrop'"
-    
-    *
-    * @return string[]|null
-    */
-    public function getCapabilities() : ?array
-    {
-        return $this->capabilities;
-    }
-    /**
-    * A list of kernel capabilities to be available for container (this
-    overrides the default set).
-    
-    Conflicts with options 'CapAdd' and 'CapDrop'"
-    
-    *
-    * @param string[]|null $capabilities
-    *
-    * @return self
-    */
-    public function setCapabilities(?array $capabilities) : self
-    {
-        $this->capabilities = $capabilities;
-        return $this;
-    }
-    /**
     * A list of kernel capabilities to add to the container. Conflicts
     with option 'Capabilities'.
     
@@ -1798,6 +1790,41 @@ class HostConfig
     public function setCapDrop(?array $capDrop) : self
     {
         $this->capDrop = $capDrop;
+        return $this;
+    }
+    /**
+    * cgroup namespace mode for the container. Possible values are:
+    
+    - `"private"`: the container runs in its own private cgroup namespace
+    - `"host"`: use the host system's cgroup namespace
+    
+    If not specified, the daemon default is used, which can either be `"private"`
+    or `"host"`, depending on daemon version, kernel support and configuration.
+    
+    *
+    * @return string|null
+    */
+    public function getCgroupnsMode() : ?string
+    {
+        return $this->cgroupnsMode;
+    }
+    /**
+    * cgroup namespace mode for the container. Possible values are:
+    
+    - `"private"`: the container runs in its own private cgroup namespace
+    - `"host"`: use the host system's cgroup namespace
+    
+    If not specified, the daemon default is used, which can either be `"private"`
+    or `"host"`, depending on daemon version, kernel support and configuration.
+    
+    *
+    * @param string|null $cgroupnsMode
+    *
+    * @return self
+    */
+    public function setCgroupnsMode(?string $cgroupnsMode) : self
+    {
+        $this->cgroupnsMode = $cgroupnsMode;
         return $this;
     }
     /**

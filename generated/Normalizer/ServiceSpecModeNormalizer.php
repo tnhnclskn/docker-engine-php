@@ -33,7 +33,7 @@ class ServiceSpecModeNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ServiceSpecMode();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Replicated', $data) && $data['Replicated'] !== null) {
@@ -48,6 +48,18 @@ class ServiceSpecModeNormalizer implements DenormalizerInterface, NormalizerInte
         elseif (\array_key_exists('Global', $data) && $data['Global'] === null) {
             $object->setGlobal(null);
         }
+        if (\array_key_exists('ReplicatedJob', $data) && $data['ReplicatedJob'] !== null) {
+            $object->setReplicatedJob($this->denormalizer->denormalize($data['ReplicatedJob'], 'Tnhnclskn\\Docker\\API\\Model\\ServiceSpecModeReplicatedJob', 'json', $context));
+        }
+        elseif (\array_key_exists('ReplicatedJob', $data) && $data['ReplicatedJob'] === null) {
+            $object->setReplicatedJob(null);
+        }
+        if (\array_key_exists('GlobalJob', $data) && $data['GlobalJob'] !== null) {
+            $object->setGlobalJob($data['GlobalJob']);
+        }
+        elseif (\array_key_exists('GlobalJob', $data) && $data['GlobalJob'] === null) {
+            $object->setGlobalJob(null);
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -58,6 +70,12 @@ class ServiceSpecModeNormalizer implements DenormalizerInterface, NormalizerInte
         }
         if (null !== $object->getGlobal()) {
             $data['Global'] = $object->getGlobal();
+        }
+        if (null !== $object->getReplicatedJob()) {
+            $data['ReplicatedJob'] = $this->normalizer->normalize($object->getReplicatedJob(), 'json', $context);
+        }
+        if (null !== $object->getGlobalJob()) {
+            $data['GlobalJob'] = $object->getGlobalJob();
         }
         return $data;
     }

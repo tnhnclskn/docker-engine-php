@@ -7,7 +7,7 @@ class ImageBuild extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint imple
     /**
     * Build an image from a tar archive with a `Dockerfile` in it.
     
-    The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive's root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).
+    The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive's root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](/engine/reference/builder/).
     
     The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.
     
@@ -34,9 +34,9 @@ class ImageBuild extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint imple
     *     @var int $cpuquota Microseconds of CPU time that the container can get in a CPU period.
     *     @var string $buildargs JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the `Dockerfile` RUN instruction, or for variable expansion in other `Dockerfile` instructions. This is not meant for passing secret values.
     
-    For example, the build arg `FOO=bar` would become `{"FOO":"bar"}` in JSON. This would result in the the query parameter `buildargs={"FOO":"bar"}`. Note that `{"FOO":"bar"}` should be URI component encoded.
+    For example, the build arg `FOO=bar` would become `{"FOO":"bar"}` in JSON. This would result in the query parameter `buildargs={"FOO":"bar"}`. Note that `{"FOO":"bar"}` should be URI component encoded.
     
-    [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg)
+    [Read more about the buildargs instruction.](/engine/reference/builder/#arg)
     
     *     @var int $shmsize Size of `/dev/shm` in bytes. The size must be greater than 0. If omitted the system uses 64MB.
     *     @var bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)*
@@ -146,7 +146,7 @@ class ImageBuild extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint imple
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return null;

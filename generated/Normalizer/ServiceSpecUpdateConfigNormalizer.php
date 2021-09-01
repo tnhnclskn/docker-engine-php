@@ -33,7 +33,7 @@ class ServiceSpecUpdateConfigNormalizer implements DenormalizerInterface, Normal
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ServiceSpecUpdateConfig();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Parallelism', $data) && $data['Parallelism'] !== null) {

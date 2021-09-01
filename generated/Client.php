@@ -186,6 +186,12 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     nil then for compatibility with older daemons the length of the
     corresponding `cpu_usage.percpu_usage` array should be used.
     
+    On a cgroup v2 host, the following fields are not set
+    * `blkio_stats`: all fields other than `io_service_bytes_recursive`
+    * `cpu_stats`: `cpu_usage.percpu_usage`
+    * `memory_stats`: `max_usage` and `failcnt`
+    Also, `memory_stats.stats` fields are incompatible with cgroup v1.
+    
     To calculate the values shown by the `stats` command of the docker cli tool
     the following formulas can be used:
     * used_memory = `memory_stats.usage - memory_stats.stats.cache`
@@ -201,6 +207,9 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     * @param array $queryParameters {
     *     @var bool $stream Stream the output. If false, the stats will be output once and then
     it will disconnect.
+    
+    *     @var bool $one-shot Only get a single stat instead of waiting for 2 cycles. Must be used
+    with `stream=false`.
     
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -382,7 +391,7 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     Either the `stream` or `logs` parameter must be `true` for this endpoint
     to do anything.
     
-    See the [documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/)
+    See the [documentation for the `docker attach` command](/engine/reference/commandline/attach/)
     for more details.
     
     ### Hijacking
@@ -552,7 +561,7 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
      *
      * @param string $id ID or name of the container
      * @param array $queryParameters {
-     *     @var bool $v Remove the volumes associated with the container.
+     *     @var bool $v Remove anonymous volumes associated with the container.
      *     @var bool $force If the container is running, kill it before removing it.
      *     @var bool $link Remove the specified link associated with the container.
      * }
@@ -687,7 +696,7 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     /**
     * Build an image from a tar archive with a `Dockerfile` in it.
     
-    The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive's root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).
+    The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive's root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](/engine/reference/builder/).
     
     The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.
     
@@ -714,9 +723,9 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     *     @var int $cpuquota Microseconds of CPU time that the container can get in a CPU period.
     *     @var string $buildargs JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the `Dockerfile` RUN instruction, or for variable expansion in other `Dockerfile` instructions. This is not meant for passing secret values.
     
-    For example, the build arg `FOO=bar` would become `{"FOO":"bar"}` in JSON. This would result in the the query parameter `buildargs={"FOO":"bar"}`. Note that `{"FOO":"bar"}` should be URI component encoded.
+    For example, the build arg `FOO=bar` would become `{"FOO":"bar"}` in JSON. This would result in the query parameter `buildargs={"FOO":"bar"}`. Note that `{"FOO":"bar"}` should be URI component encoded.
     
-    [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg)
+    [Read more about the buildargs instruction.](/engine/reference/builder/#arg)
     
     *     @var int $shmsize Size of `/dev/shm` in bytes. The size must be greater than 0. If omitted the system uses 64MB.
     *     @var bool $squash Squash the resulting images layers into a single layer. *(Experimental release only.)*
@@ -1051,13 +1060,13 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     
     Various objects within Docker report events when something happens to them.
     
-    Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, and `update`
+    Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, `update`, and `prune`
     
-    Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, and `untag`
+    Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, `untag`, and `prune`
     
-    Volumes report these events: `create`, `mount`, `unmount`, and `destroy`
+    Volumes report these events: `create`, `mount`, `unmount`, `destroy`, and `prune`
     
-    Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, and `remove`
+    Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, `remove`, and `prune`
     
     The Docker daemon reports these events: `reload`
     
@@ -1068,6 +1077,8 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     Secrets report these events: `create`, `update`, and `remove`
     
     Configs report these events: `create`, `update`, and `remove`
+    
+    The Builder reports `prune` events
     
     *
     * @param array $queryParameters {
@@ -1912,6 +1923,8 @@ class Client extends \Tnhnclskn\Docker\API\Runtime\Client\Client
     - `label=<service label>`
     - `mode=["replicated"|"global"]`
     - `name=<service name>`
+    
+    *     @var bool $status Include service status, with count of running and desired tasks.
     
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)

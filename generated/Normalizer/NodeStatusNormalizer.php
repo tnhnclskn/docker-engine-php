@@ -33,7 +33,7 @@ class NodeStatusNormalizer implements DenormalizerInterface, NormalizerInterface
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\NodeStatus();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('State', $data) && $data['State'] !== null) {

@@ -33,11 +33,11 @@ class TaskSpecResourcesNormalizer implements DenormalizerInterface, NormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\TaskSpecResources();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Limits', $data) && $data['Limits'] !== null) {
-            $object->setLimits($this->denormalizer->denormalize($data['Limits'], 'Tnhnclskn\\Docker\\API\\Model\\ResourceObject', 'json', $context));
+            $object->setLimits($this->denormalizer->denormalize($data['Limits'], 'Tnhnclskn\\Docker\\API\\Model\\Limit', 'json', $context));
         }
         elseif (\array_key_exists('Limits', $data) && $data['Limits'] === null) {
             $object->setLimits(null);

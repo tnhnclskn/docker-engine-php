@@ -33,7 +33,7 @@ class ResourcesBlkioWeightDeviceItemNormalizer implements DenormalizerInterface,
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ResourcesBlkioWeightDeviceItem();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Path', $data) && $data['Path'] !== null) {

@@ -33,7 +33,7 @@ class ContainersIdJsonGetResponse200Normalizer implements DenormalizerInterface,
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersIdJsonGetResponse200();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Id', $data) && $data['Id'] !== null) {
@@ -99,12 +99,6 @@ class ContainersIdJsonGetResponse200Normalizer implements DenormalizerInterface,
         }
         elseif (\array_key_exists('LogPath', $data) && $data['LogPath'] === null) {
             $object->setLogPath(null);
-        }
-        if (\array_key_exists('Node', $data) && $data['Node'] !== null) {
-            $object->setNode($data['Node']);
-        }
-        elseif (\array_key_exists('Node', $data) && $data['Node'] === null) {
-            $object->setNode(null);
         }
         if (\array_key_exists('Name', $data) && $data['Name'] !== null) {
             $object->setName($data['Name']);
@@ -242,9 +236,6 @@ class ContainersIdJsonGetResponse200Normalizer implements DenormalizerInterface,
         }
         if (null !== $object->getLogPath()) {
             $data['LogPath'] = $object->getLogPath();
-        }
-        if (null !== $object->getNode()) {
-            $data['Node'] = $object->getNode();
         }
         if (null !== $object->getName()) {
             $data['Name'] = $object->getName();

@@ -33,7 +33,7 @@ class GenericResourcesItemDiscreteResourceSpecNormalizer implements Denormalizer
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\GenericResourcesItemDiscreteResourceSpec();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Kind', $data) && $data['Kind'] !== null) {

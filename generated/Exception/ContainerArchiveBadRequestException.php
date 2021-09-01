@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ContainerArchiveBadRequestException extends \RuntimeException implements ClientException
+class ContainerArchiveBadRequestException extends BadRequestException
 {
     private $containersIdArchiveGetResponse400;
     public function __construct(\Tnhnclskn\Docker\API\Model\ContainersIdArchiveGetResponse400 $containersIdArchiveGetResponse400)

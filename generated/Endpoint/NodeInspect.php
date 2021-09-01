@@ -40,7 +40,7 @@ class NodeInspect extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint impl
      *
      * @return null|\Tnhnclskn\Docker\API\Model\Node
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\Node', 'json');

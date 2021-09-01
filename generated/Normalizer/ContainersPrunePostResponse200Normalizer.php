@@ -33,7 +33,7 @@ class ContainersPrunePostResponse200Normalizer implements DenormalizerInterface,
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ContainersPrunePostResponse200();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('ContainersDeleted', $data) && $data['ContainersDeleted'] !== null) {

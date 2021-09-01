@@ -33,7 +33,7 @@ class TaskSpecPlacementPreferencesItemSpreadNormalizer implements DenormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\TaskSpecPlacementPreferencesItemSpread();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('SpreadDescriptor', $data) && $data['SpreadDescriptor'] !== null) {

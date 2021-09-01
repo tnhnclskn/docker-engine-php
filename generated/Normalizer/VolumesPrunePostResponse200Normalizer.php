@@ -33,7 +33,7 @@ class VolumesPrunePostResponse200Normalizer implements DenormalizerInterface, No
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\VolumesPrunePostResponse200();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('VolumesDeleted', $data) && $data['VolumesDeleted'] !== null) {

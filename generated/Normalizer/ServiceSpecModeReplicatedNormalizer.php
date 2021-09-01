@@ -33,7 +33,7 @@ class ServiceSpecModeReplicatedNormalizer implements DenormalizerInterface, Norm
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ServiceSpecModeReplicated();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Replicas', $data) && $data['Replicas'] !== null) {

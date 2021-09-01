@@ -5,11 +5,18 @@ use Tnhnclskn\Docker\API\Model\ContainersCreatePostBody;
 
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
 
-$docker = Docker::create();
+try {
+    $docker = Docker::create();
 
-$containerConfig = new ContainersCreatePostBody();
-$containerConfig->setImage('alpine:latest');
-$containerConfig->setCmd(['echo', 'I am running a command']);
+    var_dump($docker->imageCreate('-', [
+        'fromImage' => 'alpine',
+        'tag' => 'latest',
+    ]));
 
-$containerCreateResult = $docker->containerCreate($containerConfig);
-var_dump($containerCreateResult);
+    $containerConfig = new ContainersCreatePostBody();
+    $containerConfig->setImage('alpine:latest');
+    $containerConfig->setCmd(['echo', 'I am running a command']);
+    var_dump($docker->containerCreate($containerConfig));
+} catch (Exception $e) {
+    exit($e->getMessage());
+}

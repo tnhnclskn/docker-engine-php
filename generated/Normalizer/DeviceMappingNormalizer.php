@@ -33,7 +33,7 @@ class DeviceMappingNormalizer implements DenormalizerInterface, NormalizerInterf
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\DeviceMapping();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('PathOnHost', $data) && $data['PathOnHost'] !== null) {

@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ServiceLogsServiceUnavailableException extends \RuntimeException implements ServerException
+class ServiceLogsServiceUnavailableException extends ServiceUnavailableException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

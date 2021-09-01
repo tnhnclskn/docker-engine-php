@@ -39,7 +39,7 @@ class SystemAuth extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint imple
      *
      * @return null|\Tnhnclskn\Docker\API\Model\AuthPostResponse200
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Tnhnclskn\\Docker\\API\\Model\\AuthPostResponse200', 'json');

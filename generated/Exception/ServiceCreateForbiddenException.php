@@ -2,7 +2,7 @@
 
 namespace Tnhnclskn\Docker\API\Exception;
 
-class ServiceCreateForbiddenException extends \RuntimeException implements ClientException
+class ServiceCreateForbiddenException extends ForbiddenException
 {
     private $errorResponse;
     public function __construct(\Tnhnclskn\Docker\API\Model\ErrorResponse $errorResponse)

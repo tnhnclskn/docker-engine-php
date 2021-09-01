@@ -33,7 +33,7 @@ class EndpointIPAMConfigNormalizer implements DenormalizerInterface, NormalizerI
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\EndpointIPAMConfig();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('IPv4Address', $data) && $data['IPv4Address'] !== null) {

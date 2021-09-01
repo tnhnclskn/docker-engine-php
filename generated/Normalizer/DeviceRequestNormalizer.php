@@ -33,7 +33,7 @@ class DeviceRequestNormalizer implements DenormalizerInterface, NormalizerInterf
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\DeviceRequest();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Driver', $data) && $data['Driver'] !== null) {

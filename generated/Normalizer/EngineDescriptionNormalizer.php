@@ -33,7 +33,7 @@ class EngineDescriptionNormalizer implements DenormalizerInterface, NormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\EngineDescription();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('EngineVersion', $data) && $data['EngineVersion'] !== null) {

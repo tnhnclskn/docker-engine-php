@@ -33,7 +33,7 @@ class ProcessConfigNormalizer implements DenormalizerInterface, NormalizerInterf
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\ProcessConfig();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('privileged', $data) && $data['privileged'] !== null) {

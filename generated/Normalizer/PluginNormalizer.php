@@ -33,7 +33,7 @@ class PluginNormalizer implements DenormalizerInterface, NormalizerInterface, De
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\Plugin();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('Id', $data) && $data['Id'] !== null) {

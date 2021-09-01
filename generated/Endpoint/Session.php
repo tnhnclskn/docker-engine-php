@@ -29,7 +29,7 @@ class Session extends \Tnhnclskn\Docker\API\Runtime\Client\BaseEndpoint implemen
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (101 === $status) {
             return null;

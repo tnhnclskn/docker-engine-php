@@ -33,7 +33,7 @@ class DistributionNameJsonGetResponse200DescriptorNormalizer implements Denormal
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Tnhnclskn\Docker\API\Model\DistributionNameJsonGetResponse200Descriptor();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('MediaType', $data) && $data['MediaType'] !== null) {

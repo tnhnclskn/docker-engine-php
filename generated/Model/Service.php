@@ -57,6 +57,24 @@ class Service
      */
     protected $updateStatus;
     /**
+    * The status of the service's tasks. Provided only when requested as
+    part of a ServiceList operation.
+    
+    *
+    * @var ServiceServiceStatus|null
+    */
+    protected $serviceStatus;
+    /**
+    * The status of the service when it is in one of ReplicatedJob or
+    GlobalJob modes. Absent on Replicated and Global mode services. The
+    JobIteration is an ObjectVersion, but unlike the Service's version,
+    does not need to be sent with an update request.
+    
+    *
+    * @var ServiceJobStatus|null
+    */
+    protected $jobStatus;
+    /**
      * 
      *
      * @return string|null
@@ -221,6 +239,60 @@ class Service
     public function setUpdateStatus(?ServiceUpdateStatus $updateStatus) : self
     {
         $this->updateStatus = $updateStatus;
+        return $this;
+    }
+    /**
+    * The status of the service's tasks. Provided only when requested as
+    part of a ServiceList operation.
+    
+    *
+    * @return ServiceServiceStatus|null
+    */
+    public function getServiceStatus() : ?ServiceServiceStatus
+    {
+        return $this->serviceStatus;
+    }
+    /**
+    * The status of the service's tasks. Provided only when requested as
+    part of a ServiceList operation.
+    
+    *
+    * @param ServiceServiceStatus|null $serviceStatus
+    *
+    * @return self
+    */
+    public function setServiceStatus(?ServiceServiceStatus $serviceStatus) : self
+    {
+        $this->serviceStatus = $serviceStatus;
+        return $this;
+    }
+    /**
+    * The status of the service when it is in one of ReplicatedJob or
+    GlobalJob modes. Absent on Replicated and Global mode services. The
+    JobIteration is an ObjectVersion, but unlike the Service's version,
+    does not need to be sent with an update request.
+    
+    *
+    * @return ServiceJobStatus|null
+    */
+    public function getJobStatus() : ?ServiceJobStatus
+    {
+        return $this->jobStatus;
+    }
+    /**
+    * The status of the service when it is in one of ReplicatedJob or
+    GlobalJob modes. Absent on Replicated and Global mode services. The
+    JobIteration is an ObjectVersion, but unlike the Service's version,
+    does not need to be sent with an update request.
+    
+    *
+    * @param ServiceJobStatus|null $jobStatus
+    *
+    * @return self
+    */
+    public function setJobStatus(?ServiceJobStatus $jobStatus) : self
+    {
+        $this->jobStatus = $jobStatus;
         return $this;
     }
 }
